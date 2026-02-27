@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by Roman Gulevatiy on 26.02.2026.
- * github github.com/gulevatiy-roman
+ * github github.com/RomanGulevatiy
  */
 @Component
 @RequiredArgsConstructor

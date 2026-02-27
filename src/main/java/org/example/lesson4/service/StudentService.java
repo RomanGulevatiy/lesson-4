@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by Roman Gulevatiy on 26.02.2026.
- * github github.com/gulevatiy-roman
+ * github github.com/RomanGulevatiy
  */
 public interface StudentService {
 

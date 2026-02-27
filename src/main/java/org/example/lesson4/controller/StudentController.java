@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Created by Roman Gulevatiy on 27.02.2026.
- * github github.com/gulevatiy-roman
+ * github github.com/RomanGulevatiy
  */
 @RestController
 @RequestMapping("/student")

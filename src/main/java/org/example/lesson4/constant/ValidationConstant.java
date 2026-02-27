@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Created by Roman Gulevatiy on 27.02.2026.
- * github github.com/gulevatiy-roman
+ * github github.com/RomanGulevatiy
  */
 @NoArgsConstructor
 public class ValidationConstant {
