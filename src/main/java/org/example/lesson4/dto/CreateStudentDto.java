@@ -22,6 +22,4 @@ public class CreateStudentDto {
     private Integer age;
 
     private Integer course;
-
-    private Local
 }
