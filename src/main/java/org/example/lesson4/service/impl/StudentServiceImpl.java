@@ -27,24 +27,25 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponse createStudent(CreateStudentDto request) {
-        Student student = studentMapper.createStudentFromDto(request);
-        log.info("Create student request: {}", student.getId());
+        if(storage.existsByEmail(request.getEmail())) {
+            log.info("Email already exists");
+            throw new RuntimeException("Email already exists");
+        }
 
+        Student student = studentMapper.createStudentFromDto(request);
         Student saved = storage.save(student);
+        log.info("Create student request: {}", student);
         return studentMapper.toStudentResponse(saved);
     }
 
     @Override
     public StudentResponse updateStudent(Long id, UpdateStudentDto request) {
-        Student student = storage.findById(id);
+        Student updated = studentMapper.updateStudentFromDto(request);
+        Student saved = storage.update(id, updated);
+        if(saved == null) return null;
 
-        student.setName(request.getName());
-        student.setAge(request.getAge());
-        student.setCourse(request.getCourse());
         log.info("Updated student with id={}", id);
-
-        storage.save(student);
-        return studentMapper.toStudentResponse(student);
+        return studentMapper.toStudentResponse(saved);
     }
 
     @Override
