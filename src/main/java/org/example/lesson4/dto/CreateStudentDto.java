@@ -1,9 +1,11 @@
 package org.example.lesson4.dto;
 
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.lesson4.constant.ValidationConstant;
 
 /**
  * Created by Roman Gulevatiy on 26.02.2026.
@@ -15,11 +17,26 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CreateStudentDto {
 
+    @NotBlank(message = ValidationConstant.Student.NAME_REQUIRED_MESSAGE)
+    @Size(
+            min = ValidationConstant.Student.NAME_MIN,
+            max = ValidationConstant.Student.NAME_MAX,
+            message = ValidationConstant.Student.NAME_SIZE_MESSAGE
+    )
     private String name;
 
+    @Email(message = "Email must be a valid format")
+    @NotBlank(message = "Email is required")
     private String email;
 
+    @NotNull(message = ValidationConstant.Student.AGE_REQUIRED_MESSAGE)
+    @Min(
+            value = ValidationConstant.Student.AGE_MIN_VALUE,
+            message = ValidationConstant.Student.AGE_SIZE_MESSAGE
+    )
     private Integer age;
 
+    @Min(ValidationConstant.Student.COURSE_MIN_VALUE)
+    @Max(ValidationConstant.Student.COURSE_MAX_VALUE)
     private Integer course;
 }
