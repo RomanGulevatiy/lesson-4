@@ -36,6 +36,7 @@ public class CreateStudentDto {
     )
     private Integer age;
 
+    @NotNull(message = ValidationConstant.Student.COURSE_REQUIRED_MESSAGE)
     @Min(ValidationConstant.Student.COURSE_MIN_VALUE)
     @Max(ValidationConstant.Student.COURSE_MAX_VALUE)
     private Integer course;

@@ -1,5 +1,6 @@
 package org.example.lesson4.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.lesson4.dto.CreateStudentDto;
 import org.example.lesson4.dto.StudentResponse;
@@ -21,13 +22,13 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping
-    public StudentResponse createStudent(@RequestBody CreateStudentDto request) {
+    public StudentResponse createStudent(@Valid @RequestBody CreateStudentDto request) {
         return studentService.createStudent(request);
     }
 
     @PutMapping("/{id}")
     public StudentResponse updateStudent(@PathVariable Long id,
-                                         @RequestBody UpdateStudentDto request) {
+                                         @Valid @RequestBody UpdateStudentDto request) {
         return studentService.updateStudent(id, request);
     }
 

@@ -21,5 +21,6 @@ public class ValidationConstant {
 
         public static final int COURSE_MIN_VALUE = 1;
         public static final int COURSE_MAX_VALUE = 6;
+        public static final String COURSE_REQUIRED_MESSAGE = "Course is required";
     }
 }
