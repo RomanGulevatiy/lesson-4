@@ -4,6 +4,8 @@ import org.example.lesson4.dto.CreateStudentDto;
 import org.example.lesson4.dto.StudentResponse;
 import org.example.lesson4.dto.UpdateStudentDto;
 
+import java.util.List;
+
 /**
  * Created by Roman Gulevatiy on 26.02.2026.
  * github github.com/gulevatiy-roman
@@ -18,5 +20,5 @@ public interface StudentService {
 
     StudentResponse getStudent(Long id);
 
-    StudentResponse getAllStudents();
+    List<StudentResponse> getAllStudents();
 }

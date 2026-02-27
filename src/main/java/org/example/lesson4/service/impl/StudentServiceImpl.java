@@ -1,6 +1,7 @@
 package org.example.lesson4.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.lesson4.dto.CreateStudentDto;
 import org.example.lesson4.dto.StudentResponse;
 import org.example.lesson4.dto.UpdateStudentDto;
@@ -8,12 +9,17 @@ import org.example.lesson4.mapper.StudentMapper;
 import org.example.lesson4.model.Student;
 import org.example.lesson4.service.StudentService;
 import org.example.lesson4.utils.Storage;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Roman Gulevatiy on 26.02.2026.
  * github github.com/gulevatiy-roman
  */
+@Service
 @RequiredArgsConstructor
+@Slf4j
 public class StudentServiceImpl implements StudentService {
 
     private final StudentMapper studentMapper;
@@ -22,6 +28,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentResponse createStudent(CreateStudentDto request) {
         Student student = studentMapper.createStudentFromDto(request);
+        log.info("Create student request: {}", student.getId());
+
         Student saved = storage.save(student);
         return studentMapper.toStudentResponse(saved);
     }
@@ -33,6 +41,7 @@ public class StudentServiceImpl implements StudentService {
         student.setName(request.getName());
         student.setAge(request.getAge());
         student.setCourse(request.getCourse());
+        log.info("Updated student with id={}", id);
 
         storage.save(student);
         return studentMapper.toStudentResponse(student);
@@ -40,20 +49,27 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean deleteStudent(Long id) {
+        Student student = storage.findById(id);
+        if(student == null) return false;
 
-
-        storage.delete(id);
-        ma
-        return true;
+        log.info("Deleted student with id={}", id);
+        return storage.delete(id);
     }
 
     @Override
     public StudentResponse getStudent(Long id) {
-        return null;
+        Student student = storage.findById(id);
+        if(student == null) return null;
+
+        log.info("Get student with id={}", id);
+        return studentMapper.toStudentResponse(student);
     }
 
     @Override
-    public StudentResponse getAllStudents() {
-        return null;
+    public List<StudentResponse> getAllStudents() {
+        return storage.findAll()
+                .stream()
+                .map(studentMapper::toStudentResponse)
+                .toList();
     }
 }
